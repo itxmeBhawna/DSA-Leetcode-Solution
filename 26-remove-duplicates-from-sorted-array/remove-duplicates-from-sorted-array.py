@@ -1,23 +1,11 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        seen = set()
-        count = 0
-        k = 0
-        for num in nums:
-            if num not in seen:
-                seen.add(num)
-                nums[k] = num
-                k+=1
-                count +=1
-        return count        
-
-        
-
-       
-
-       
-          
-
-
-
+        read = 1
+        write = 1
+        while read < len(nums):
+            if nums[read] != nums[read-1]:
+                nums[write] = nums[read]
+                write += 1
+            read +=1
+        return write        
         
