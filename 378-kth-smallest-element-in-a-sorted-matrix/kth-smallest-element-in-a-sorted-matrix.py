@@ -1,0 +1,27 @@
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        def countLess(x):
+            row = n-1
+            col = 0
+            count = 0
+            while row >=0 and col < n:
+                if matrix[row][col] <= x:
+                    count += row + 1
+                    col += 1
+                else:
+                    row -=1
+            return count
+        left = matrix[0][0]
+        right = matrix[n-1][n-1]
+        while left < right:
+            mid = left + (right - left)//2
+            if countLess(mid) < k:
+                left = mid +1
+            else:
+                right = mid
+        return left            
+
+
+        
+        
