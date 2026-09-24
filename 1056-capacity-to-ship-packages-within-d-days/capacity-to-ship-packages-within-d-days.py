@@ -1,22 +1,29 @@
 class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
-        low = max(weights)
-        high = sum(weights)
-        while low <= high:
-            mid = low + (high - low)//2
-            curr_load = 0
+        def helper(weights, days, cap):
             day = 1
+            cur_load = 0
             for weight in weights:
 
-                if curr_load + weight <= mid:
-                    curr_load += weight
+                if cur_load + weight <= cap:
+                    cur_load += weight
                 else:
-                    day +=1
-                    curr_load = weight
+                    day += 1
+                    cur_load = weight
             if day <= days:
-                high = mid - 1
-            else:
-                low = mid +1
-        return low                    
+                return True
+            return False 
 
-        
+        left = max(weights)
+        right = sum(weights)
+        ans = 0
+        while left <= right:
+            mid = left + (right-left)//2
+            if helper(weights, days, mid):
+                ans = mid
+                right = mid - 1
+            else:
+                left = mid  + 1
+        return ans            
+
+            
