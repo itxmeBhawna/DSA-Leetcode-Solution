@@ -7,7 +7,7 @@ class Solution:
                     return False
             return True
         if len(stones) <= 2:
-            return max(stones)    
+            return stones[-1] - stones[0]    
         left = 0
         right = stones[-1] - stones[0]
         ans = 0
